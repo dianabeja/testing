@@ -3,7 +3,7 @@ on:
   push:
     branches: [ "develop"]
   pull_request:
-    branches: [ "devdelop"]
+    branches: [ "develop"]
 jobs:
   develop_ci_cd:
     runs-on: ubuntu-latest
