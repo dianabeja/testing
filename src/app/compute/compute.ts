@@ -4,6 +4,6 @@ export function compute(x: number) {
     } else if (x < 0) {
       return 0;
     } else {
-      return 2; // Retorna 2 si x es igual a 0, como en tu ejemplo original.
+      return 2; 
     }
   }
