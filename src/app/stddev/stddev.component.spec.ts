@@ -4,6 +4,7 @@ import { of } from 'rxjs';
 import { DataService2 } from '../service/data2.service';
 import { DataService } from '../service/data.service';
 import { StddevComponent } from './stddev.component';
+import { MediaComponent } from '../media/media.component';
 
 describe('StddevComponent', () => {
   let component: StddevComponent;
@@ -11,16 +12,15 @@ describe('StddevComponent', () => {
   let dataServiceMock: jasmine.SpyObj<DataService2>;
   let dataServiceMock2: jasmine.SpyObj<DataService>;
 
-
   beforeEach(async () => {
     dataServiceMock = jasmine.createSpyObj('DataService2', ['getMedia']);
     dataServiceMock2 = jasmine.createSpyObj('DataService', ['getSize']);
 
 
     await TestBed.configureTestingModule({
-      declarations: [ StddevComponent ],
+      declarations: [StddevComponent],  
       imports: [ HttpClientTestingModule ],
-      providers: [
+      providers: [ MediaComponent,
         { provide: DataService2, useValue: dataServiceMock },
         { provide: DataService, useValue: dataServiceMock2 },
 
@@ -54,26 +54,8 @@ describe('StddevComponent', () => {
     expect(probar_componente).toHaveBeenCalled();
   });
 
-  it('should return mean = 550.6 with the data Size', () => {
-    //Mandar al método getMedia el array de datos que nos retorna la ejecución de obtenerMediaSize
-    const result= component.getStddev(   
-      160, 
-      591,
-      114,
-      229,
-      230,
-      270,
-      128,
-      1657,
-      624,
-      1503);
-    //Testear que la media retornada sea 550.6
-    expect(result).toBe(550.6)
-  })
-
-  it('should return mean = 550.6 with the data Hours', () => {
-    //Mandar al método getMedia el array de datos que nos retorna la ejecución de obtenerStddevHours
-    const result= component.getStddev(   
+  it('should return mean = 62.26 with the data Size', () => {
+    const hours= [   
       15.0, 
       69.9, 
       6.5, 
@@ -83,9 +65,27 @@ describe('StddevComponent', () => {
       19.4, 
       198.7, 
       38.8, 
-      138.2);
-    //Testear que la media retornada sea 60.32
-    expect(result).toBe(60.32)
+      138.2];
+      const media = component.media_size;
+      const result= component.getStddev(hours, media)
+    expect(result).toBe(62.26)
+  })
+
+  it('should return mean = 572.03 with the data Hours', () => {
+    const hours= [   
+      160, 
+      591,
+      114,
+      229,
+      230,
+      270,
+      128,
+      1657,
+      624,
+      1503];
+      const media = component.media_hours;
+      const result= component.getStddev(hours, media)
+    expect(result).toBe(572.03)
   })
 
   it('should set numbers_hours on successful getHours call', async () => {

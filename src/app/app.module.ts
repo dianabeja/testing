@@ -19,7 +19,7 @@ import { StddevComponent } from './stddev/stddev.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [MediaComponent, StddevComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

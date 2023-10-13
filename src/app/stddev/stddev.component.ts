@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../service/data.service';
 import { DataService2 } from '../service/data2.service';
+import { MediaComponent } from '../media/media.component';
 
 @Component({
   selector: 'app-stddev',
@@ -10,20 +11,21 @@ import { DataService2 } from '../service/data2.service';
 export class StddevComponent implements OnInit {
   numbers_size: any = [];
   numbers_hours: any[] | any;
-
-  media_size: any;
-  media_hours: any;
-
+  desviacion_size: any; 
+  desviacion_hours: any;
+  media_hours:any =this.mediaComponent.media_hours;
+  media_size:any =this.mediaComponent.media_size;
   constructor(
     public dataServiceSize: DataService,
-    public dataServiceHours: DataService2
+    public dataServiceHours: DataService2,
+    public mediaComponent :MediaComponent
   ) {}
 
   async ngOnInit(): Promise<void> {
     await this.getHours();
     await this.getSize();
-    this.obtenerMediaHours();
-    this.obtenerMediaSize();
+    this.obtenerStddevHours();
+    this.obtenerStddevSize();
   }
 
   async getHours() {
@@ -56,26 +58,36 @@ export class StddevComponent implements OnInit {
     });
   }
 
-  async obtenerMediaSize() {
+  async obtenerStddevSize() {
     if (this.numbers_size && this.numbers_size.data && Array.isArray(this.numbers_size.data)) {
-      this.media_size = this.getMedia(...this.numbers_size.data);
+      const media = this.media_size(...this.numbers_size.data);
+      this.desviacion_size = this.getStddev(this.numbers_size.data, media);
+      console.log(this.desviacion_size);
     } else {
-      console.log('No hay datos disponibles para calcular la media de size.');
+      console.log('No hay datos disponibles para calcular la desviación estándar de size.');
     }
   }
 
-  async obtenerMediaHours() {
+  async obtenerStddevHours() {
     if (this.numbers_hours && this.numbers_hours.data && Array.isArray(this.numbers_hours.data)) {
-      this.media_hours = this.getMedia(...this.numbers_hours.data);
+      const media = this.media_hours(...this.numbers_hours.data);
+      this.desviacion_hours = this.getStddev(this.numbers_hours.data, media);
+      console.log(this.desviacion_hours);
     } else {
-      console.log('No hay datos disponibles para calcular la media de horas.');
+      console.log('No hay datos disponibles para calcular la desviación estándar de horas.');
     }
   }
 
-  getMedia(...numbers: number[]): number {
-    if (numbers.length === 0) return 0;
-    const sum = numbers.reduce((a, b) => a + b, 0);
-    return +(sum / numbers.length).toFixed(2);
-  }
-}
+  getStddev(arreglo: number[], media: number): number {
+    let acumulador = 0;
 
+    for (let i = 0; i < arreglo.length; i++) {
+      const diferencia = arreglo[i] - media;
+      acumulador += diferencia * diferencia;
+    }
+
+    const varianza = acumulador / (arreglo.length - 1);
+    const desviacion = Math.sqrt(varianza);
+    return +(desviacion.toFixed(2));
+}
+}
