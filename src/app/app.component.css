@@ -1,0 +1,56 @@
+/* Estilos generales del contenedor */
+.Contenedor_Principal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Esto hará que el contenedor ocupe toda la altura de la pantalla */
+    background-color: #f5f5f5; /* Color claro de fondo */
+}
+
+.Contenedor_Secundario {
+    margin-top: 5%;
+
+    width: 60%; /* Ocupa el 80% del ancho de su contenedor padre */
+
+    max-width: 1200px; /* Ancho máximo para grandes pantallas */
+    background-color: #ffffff; /* Color blanco para el fondo */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Sombra para dar profundidad */
+    border-radius: 10px; /* Esquinas ligeramente redondeadas */
+    overflow: hidden; /* Asegura que nada se salga del contenedor */
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    vertical-align: top;
+    padding: 15px;
+}
+
+/* Iconos FontAwesome */
+i.fa {
+    color: #A5A5A5;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+/* Colocamos el estilo de los componentes insertados en el HTML. 
+   Ajusta estos estilos si necesitas cambios específicos en esos componentes. */
+app-header {
+    display: block;
+    width: 100%;
+}
+
+app-work-experience {
+    display: block;
+    width: 100%;
+}
+
+app-app-skills{
+    display: block;
+    width: 100%;
+}
+
