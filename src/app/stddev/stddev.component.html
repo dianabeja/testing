@@ -1,0 +1,23 @@
+<div class="contenedor-flex">
+    <div class="Caja sombra" *ngIf="numbers_hours && numbers_hours.length">
+        <h3>Números obtenidos de Hours:</h3>
+        <ul>
+          <li *ngFor="let number of numbers_hours">{{ number }}</li>
+        </ul>
+      
+        <h3>Media de los números:</h3>
+        <p>{{ desviacion_hours }}</p>
+    </div>
+    
+    <div class="Caja sombra" *ngIf="numbers_size && numbers_size.length">
+        <h3>Números obtenidos de Size:</h3>
+        <ul>
+          <li *ngFor="let number of numbers_size">{{ number }}</li>
+        </ul>
+      
+        <h3>Media de los números:</h3>
+        <p>{{ desviacion_size }}</p>
+    </div>
+    </div>
+    
+      
