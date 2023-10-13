@@ -1,0 +1,39 @@
+
+body {
+    background-color: #F7F2E7; 
+
+}
+
+/* Estilo para los encabezados */
+h3 {
+    color: #7a7468; 
+    border-bottom: 1px solid #D9D0C1; 
+    padding-bottom: 5px;
+    margin-top: 30px;
+}
+
+
+ul {
+    padding: 0;
+    list-style-type: none; 
+    color: rgb(118, 119, 108);
+    text-align: center;
+}
+
+li {
+    background-color: #E4DED5; 
+    padding: 10px; 
+    margin: 5px 0; 
+    border-radius: 5px; 
+}
+
+p {
+    background-color: #E6E2D7; 
+    margin-top: 20px;
+    border-radius: 5px; 
+    font-weight: bold; 
+    color: rgb(118, 119, 108);
+    text-align: center;
+    padding: 10px;
+
+}
