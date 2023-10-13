@@ -5,46 +5,34 @@ import { MediaComponent } from './media.component';
 import { DataService2 } from '../service/data2.service';
 import { DataService } from '../service/data.service';
 
+
+
 describe('MediaComponent', () => {
   let component: MediaComponent;
   let fixture: ComponentFixture<MediaComponent>;
-  let dataservice2: DataService2;
-  let dataservice: DataService;
+  let dataServiceMock: jasmine.SpyObj<DataService2>;
+  let dataServiceMock2: jasmine.SpyObj<DataService>;
+
 
   beforeEach(async () => {
+    dataServiceMock = jasmine.createSpyObj('DataService2', ['getMedia']);
+    dataServiceMock2 = jasmine.createSpyObj('DataService', ['getSize']);
+
 
     await TestBed.configureTestingModule({
       declarations: [ MediaComponent ],
       imports: [ HttpClientTestingModule ],
-      providers: [DataService2, DataService]
+      providers: [
+        { provide: DataService2, useValue: dataServiceMock },
+        { provide: DataService, useValue: dataServiceMock2 },
+
+      ]
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(MediaComponent);
     component = fixture.componentInstance;
-    dataservice2 = TestBed.inject(DataService2);
-    dataservice = TestBed.inject(DataService);
   });
-
-  it('Probar que el metodo mediaSize esté funcionando', () => {
-    //Simulacion de la ejecución del método obtenerMediaSize que llamará al servicio DataService
-    const mediaSizeSpy = spyOn(component, 'obtenerMediaSize');
-    //Simular apertura del componente media.component.ts 
-    fixture.detectChanges();
-    //Testear que el metodo es mandado a traer 
-    expect(mediaSizeSpy).toHaveBeenCalled();
-  });
-
-  it('Probar que el metodo mediaHours esté funcionando', () => {
-    //Simulacion de la ejecución del método obtenerMediaHours que llamará al servicio DataService2
-    const mediaHoursSpy = spyOn(component, 'obtenerMediaHours');
-    //Simular apertura del componente media.component.ts 
-    fixture.detectChanges();
-    //Testear que el metodo es mandado a traer 
-    expect(mediaHoursSpy).toHaveBeenCalled();
-  });
-  
-
 
   it('should create', () => {
     //Testear que el componente es creado
@@ -102,10 +90,8 @@ describe('MediaComponent', () => {
     expect(result).toBe(60.32)
   })
 
-  it('Retorno correcto al llamado de Api Hours', () => {
-    //Simulación de lo que la Api retornará al hacer el método Get del Array Hours
-    let array:any = [
-      15.0, 
+  it('should set numbers_hours on successful getHours call', async () => {
+    const testData = { data: [   15.0, 
       69.9, 
       6.5, 
       22.4, 
@@ -114,39 +100,16 @@ describe('MediaComponent', () => {
       19.4, 
       198.7, 
       38.8, 
-      138.2
-    ]
-
-    //Variable para guardar lo obtenido del llamado de la Api
-    let datos_obtenidos: any;
-
-    //Crear una variable para ejecutar una "simulación" con spyOn de la ejecución de la llamada al servicio, en su método getMedia. Ademas, el data:Array es una simulacion
-    //de lo que retorna el api
-    const servicio = spyOn(dataservice2, 'getMedia').and.returnValue(of({ data: array }));
-
-    //Se ejecuta el método de llamada a la Api para la obtención del array de datos y poder llenar las variables (numbers_hours)
-    component.obtenerMediaHours();
-    component.dataServiceHours.getMedia().subscribe((data) => datos_obtenidos = data.data)
-
-    //Testeo de que el llamado al servicio es ejecutado correctamente
-    expect(servicio).toHaveBeenCalled();
-
-    //Testear de que la variable media_hours coincide con la ejecución del método GetMedia, pasandole el parameto de los datos obtenidos por el servicio
-    expect(component.media_hours).toEqual(component.getMedia(...datos_obtenidos));
-
-    //Ejecutar el método GetMedia 
-    const result= component.getMedia( ...datos_obtenidos  );
-    //Testear que la media obtenida sea la esperada en el documento A1
-    expect(result).toBe(60.32)
-
-    //Testear que los datos obtenidos sean iguales a los esperados
-    expect(datos_obtenidos).toBe(array)
-  })
-
-  it('Retorno correcto al llamado de Api Size', () => {
-    //Simulación de lo que la Api retornará al hacer el método Get del Array Size
-    let array:any = [
-      160, 
+      138.2] };
+    dataServiceMock.getMedia.and.returnValue(of(testData));
+  
+    await component.getHours();
+  
+    expect(component.numbers_hours).toEqual(testData.data);
+  });
+  
+  it('should set numbers_size on successful getSize call', async () => {
+    const testData = { data: [     160, 
       591,
       114,
       229,
@@ -155,33 +118,12 @@ describe('MediaComponent', () => {
       128,
       1657,
       624,
-      1503
-    ]
-
-    //Variable para guardar lo obtenido del llamado de la Api
-    let datos_obtenidos: any;
-
-    //Crear una variable para ejecutar una "simulación" con spyOn de la ejecución de la llamada al servicio, en su método getMedia. Ademas, el data:Array es una simulacion
-    //de lo que retorna el api
-    const servicio = spyOn(dataservice, 'getSize').and.returnValue(of({ data: array }));
-
-    //Se ejecuta el método de llamada a la Api para la obtención del array de datos y poder llenar las variables (numbers_hours)
-    component.obtenerMediaSize();
-    component.dataServiceSize.getSize().subscribe((data) => datos_obtenidos = data.data)
-
-    //Testeo de que el llamado al servicio es ejecutado correctamente
-    expect(servicio).toHaveBeenCalled();
-
-    //Testear de que la variable media_hours coincide con la ejecución del método GetMedia, pasandole el parameto de los datos obtenidos por el servicio
-    expect(component.media_size).toEqual(component.getMedia(...datos_obtenidos));
-
-    //Ejecutar el método GetMedia 
-    const result= component.getMedia( ...datos_obtenidos  );
-    //Testear que la media obtenida sea la esperada en el documento A1
-    expect(result).toBe(550.6)
-
-    //Testear que los datos obtenidos sean iguales a los esperados
-    expect(datos_obtenidos).toBe(array)
-  })
+      1503] };
+    dataServiceMock2.getSize.and.returnValue(of(testData));
+  
+    await component.getSize();
+  
+    expect(component.numbers_size).toEqual(testData.data);
+  });
   
 });

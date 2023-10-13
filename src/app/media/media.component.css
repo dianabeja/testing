@@ -37,3 +37,24 @@ p {
     padding: 10px;
 
 }
+
+.sombra {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.Caja {
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    background-color: #fafafa; 
+    font-family: 'Arial', sans-serif;
+    color: #535353;
+    margin-bottom: 4px;
+    padding: 15px;
+    text-align: center;
+    width: 45%;
+}
+
+.contenedor-flex {
+    display: flex;
+    justify-content: space-between;  /* Distribuye las tarjetas de manera uniforme en el contenedor */
+    gap: 20px;  /* Espacio entre las tarjetas */
+}

@@ -19,23 +19,57 @@ export class MediaComponent implements OnInit {
     public dataServiceHours: DataService2
   ) {}
 
-  ngOnInit(): void {
-    this.obtenerMediaSize();
+  async ngOnInit(): Promise<void> {
+    await this.getHours();
+    await this.getSize();
     this.obtenerMediaHours();
+    this.obtenerMediaSize();
   }
 
-  obtenerMediaSize() {
-    return this.dataServiceSize.getSize().subscribe((data: any) => {
-      this.numbers_size = data.data;
-      this.media_size = this.getMedia(...this.numbers_size);
+  async getHours() {
+    return new Promise<void>((resolve, reject) => {
+      this.dataServiceHours.getMedia().subscribe(
+        (data: any) => {
+          this.numbers_hours = data.data;
+          resolve();
+        },
+        (error) => {
+          console.error('Error al obtener los datos de horas:', error);
+          reject(error);
+        }
+      );
     });
   }
 
-  obtenerMediaHours(): number | any {
-    return this.dataServiceHours.getMedia().subscribe((data: any) => {
-      this.numbers_hours = data.data;
-      this.media_hours = this.getMedia(...this.numbers_hours);
+  async getSize() {
+    return new Promise<void>((resolve, reject) => {
+      this.dataServiceSize.getSize().subscribe(
+        (data: any) => {
+          this.numbers_size = data.data;
+          resolve();
+        },
+        (error) => {
+          console.error('Error al obtener los datos de size:', error);
+          reject(error);
+        }
+      );
     });
+  }
+
+  async obtenerMediaSize() {
+    if (this.numbers_size && this.numbers_size.data && Array.isArray(this.numbers_size.data)) {
+      this.media_size = this.getMedia(...this.numbers_size.data);
+    } else {
+      console.log('No hay datos disponibles para calcular la media de size.');
+    }
+  }
+
+  async obtenerMediaHours() {
+    if (this.numbers_hours && this.numbers_hours.data && Array.isArray(this.numbers_hours.data)) {
+      this.media_hours = this.getMedia(...this.numbers_hours.data);
+    } else {
+      console.log('No hay datos disponibles para calcular la media de horas.');
+    }
   }
 
   getMedia(...numbers: number[]): number {

@@ -1,22 +1,23 @@
-<!-- media.component.html -->
-<div *ngIf="numbers_hours && numbers_hours.length">
-    <h3>Números obtenidos de la API:</h3>
+<div class="contenedor-flex">
+<div class="Caja sombra" *ngIf="numbers_hours && numbers_hours.length">
+    <h3>Números obtenidos de Hours:</h3>
     <ul>
       <li *ngFor="let number of numbers_hours">{{ number }}</li>
     </ul>
   
     <h3>Media de los números:</h3>
     <p>{{ media_hours }}</p>
-  </div>
-  <div *ngIf="numbers_size && numbers_size.length">
-    <h3>Números obtenidos de la API:</h3>
+</div>
+
+<div class="Caja sombra" *ngIf="numbers_size && numbers_size.length">
+    <h3>Números obtenidos de Size:</h3>
     <ul>
       <li *ngFor="let number of numbers_size">{{ number }}</li>
     </ul>
   
     <h3>Media de los números:</h3>
     <p>{{ media_size }}</p>
-  </div>
-  
+</div>
+</div>
 
   
