@@ -11,7 +11,7 @@ export class MediaComponent implements OnInit {
   numbers_size: any = [];
   numbers_hours: any[] | any;
 
-  media_size: any;
+  media_size: any ;
   media_hours: any;
 
   constructor(
@@ -57,19 +57,21 @@ export class MediaComponent implements OnInit {
   }
 
   async obtenerMediaSize() {
-    if (this.numbers_size && this.numbers_size.data && Array.isArray(this.numbers_size.data)) {
-      this.media_size = this.getMedia(...this.numbers_size.data);
+    if (this.numbers_size && this.numbers_size && Array.isArray(this.numbers_size)) {
+      this.media_size = this.getMedia(...this.numbers_size);
     } else {
       console.log('No hay datos disponibles para calcular la media de size.');
     }
   }
 
   async obtenerMediaHours() {
-    if (this.numbers_hours && this.numbers_hours.data && Array.isArray(this.numbers_hours.data)) {
-      this.media_hours = this.getMedia(...this.numbers_hours.data);
+    if (this.numbers_hours && this.numbers_hours && Array.isArray(this.numbers_hours)) {
+      this.media_hours = this.getMedia(...this.numbers_hours);
+      console.log(this.media_hours)
     } else {
       console.log('No hay datos disponibles para calcular la media de horas.');
     }
+    return this.media_hours;
   }
 
   getMedia(...numbers: number[]): number {
@@ -77,4 +79,10 @@ export class MediaComponent implements OnInit {
     const sum = numbers.reduce((a, b) => a + b, 0);
     return +(sum / numbers.length).toFixed(2);
   }
+}
+
+export function getMedia(...numbers: number[]): number {
+  if (numbers.length === 0) return 0;
+  const sum = numbers.reduce((a, b) => a + b, 0);
+  return +(sum / numbers.length).toFixed(2);
 }
