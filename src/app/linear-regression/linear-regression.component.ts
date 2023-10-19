@@ -8,10 +8,22 @@ import { TestService } from '../service/datatest1.service';
 export class LinearRegressionComponent {
   constructor(public testService: TestService) {}
 
+  //private datos_Api_Test1: any;
+  //private datos_Api_Test2: any;
+  //private datos_Api_Test3: any;
+  //private datos_Api_Test4: any;
+//
+  //LlenarDatos() {
+  //  this.datos_Api_Test1 = this.testService.getTest1();
+  //  this.datos_Api_Test2 = this.testService.getTest2();
+  //  this.datos_Api_Test3 = this.testService.getTest3();
+  //  this.datos_Api_Test4 = this.testService.getTest4();
+  //}
+
   ngOnInit(): void {
   }
 
-
+  
 
   sum(data: number[]): number {
     return data.reduce((acc, value) => acc + value, 0);
