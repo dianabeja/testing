@@ -20,34 +20,18 @@ export class TestService {
 
   getTest1():Observable<any>{
     return this.http.get<any>(this.apiURL+'test1',this.httpoptions)
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-    )
   }
 
   getTest2():Observable<any>{
     return this.http.get<any>(this.apiURL+'test2',this.httpoptions)
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-    )
   }
 
   getTest3():Observable<any>{
     return this.http.get<any>(this.apiURL+'test3',this.httpoptions)
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-    )
   }
 
   getTest4():Observable<any>{
     return this.http.get<any>(this.apiURL+'test4',this.httpoptions)
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-    )
   }
   
   handleError(error: any){

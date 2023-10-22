@@ -5,25 +5,33 @@ import { TestService } from '../service/datatest1.service';
   templateUrl: './linear-regression.component.html',
   styleUrls: ['./linear-regression.component.css'],
 })
-export class LinearRegressionComponent {
+export class LinearRegressionComponent implements OnInit {
   constructor(public testService: TestService) {}
 
-  //private datos_Api_Test1: any;
-  //private datos_Api_Test2: any;
-  //private datos_Api_Test3: any;
-  //private datos_Api_Test4: any;
-//
-  //LlenarDatos() {
-  //  this.datos_Api_Test1 = this.testService.getTest1();
-  //  this.datos_Api_Test2 = this.testService.getTest2();
-  //  this.datos_Api_Test3 = this.testService.getTest3();
-  //  this.datos_Api_Test4 = this.testService.getTest4();
-  //}
-
-  ngOnInit(): void {
-  }
-
+  public datos_Api_Test1: any;
+  public datos_Api_Test2: any;
+  public datos_Api_Test3: any;
+  public datos_Api_Test4: any;
   
+  ngOnInit(): void {
+    console.log("Ingresa al ngOnit")
+    this.testService.getTest1().subscribe((data: any) => {
+      console.log("Ingresa al componente.Test1")
+      this.datos_Api_Test1 = data;
+    })
+    this.testService.getTest2().subscribe((data: any) => {
+      console.log("Ingresa al componente.Test2")
+      this.datos_Api_Test2 = data;
+    })
+    this.testService.getTest3().subscribe((data: any) => {
+      console.log("Ingresa al componente.Test3")
+      this.datos_Api_Test3 = data;
+    })
+    this.testService.getTest4().subscribe((data: any) => {
+      console.log("Ingresa al componente.Test4")
+      this.datos_Api_Test4 = data;
+    })
+  }
 
   sum(data: number[]): number {
     return data.reduce((acc, value) => acc + value, 0);
@@ -56,4 +64,69 @@ export class LinearRegressionComponent {
   yk(x: number[], y: number[], xk: number): number {
     return this.B0(x, y) + this.B1(x, y) * xk;
   }
+
+  async getObtenerTest1() {
+  return new Promise<void>((resolve, reject) => {
+    this.testService.getTest1().subscribe(
+      (data: any) => {
+        console.log(data)
+        this.datos_Api_Test1 = data;
+        resolve();
+      },
+      (error) => {
+        console.error('Error al obtener los datos de horas:', error);
+        reject(error);
+      }
+    );
+  });
+  }
+
+  async getObtenerTest2() {
+    return new Promise<void>((resolve, reject) => {
+      this.testService.getTest2().subscribe(
+        (data: any) => {
+          console.log(data)
+          this.datos_Api_Test2 = data;
+          resolve();
+        },
+        (error) => {
+          console.error('Error al obtener los datos de horas:', error);
+          reject(error);
+        }
+      );
+    });
+    }
+
+    async getObtenerTest3() {
+      return new Promise<void>((resolve, reject) => {
+        this.testService.getTest3().subscribe(
+          (data: any) => {
+            console.log(data)
+            this.datos_Api_Test3 = data;
+            resolve();
+          },
+          (error) => {
+            console.error('Error al obtener los datos de horas:', error);
+            reject(error);
+          }
+        );
+      });
+      }
+
+      async getObtenerTest4() {
+        return new Promise<void>((resolve, reject) => {
+          this.testService.getTest4().subscribe(
+            (data: any) => {
+              console.log(data)
+              this.datos_Api_Test4 = data;
+              resolve();
+            },
+            (error) => {
+              console.error('Error al obtener los datos de horas:', error);
+              reject(error);
+            }
+          );
+        });
+        }
+
 }
