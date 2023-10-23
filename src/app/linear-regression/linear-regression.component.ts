@@ -14,21 +14,21 @@ export class LinearRegressionComponent implements OnInit {
   public datos_Api_Test4: any;
   
   ngOnInit(): void {
-    console.log("Ingresa al ngOnit")
+    
     this.testService.getTest1().subscribe((data: any) => {
-      console.log("Ingresa al componente.Test1")
+      
       this.datos_Api_Test1 = data;
     })
     this.testService.getTest2().subscribe((data: any) => {
-      console.log("Ingresa al componente.Test2")
+      
       this.datos_Api_Test2 = data;
     })
     this.testService.getTest3().subscribe((data: any) => {
-      console.log("Ingresa al componente.Test3")
+      
       this.datos_Api_Test3 = data;
     })
     this.testService.getTest4().subscribe((data: any) => {
-      console.log("Ingresa al componente.Test4")
+      
       this.datos_Api_Test4 = data;
     })
   }
@@ -69,8 +69,7 @@ export class LinearRegressionComponent implements OnInit {
   return new Promise<void>((resolve, reject) => {
     this.testService.getTest1().subscribe(
       (data: any) => {
-        console.log(data)
-        this.datos_Api_Test1 = data;
+        ;
         resolve();
       },
       (error) => {
@@ -85,8 +84,7 @@ export class LinearRegressionComponent implements OnInit {
     return new Promise<void>((resolve, reject) => {
       this.testService.getTest2().subscribe(
         (data: any) => {
-          console.log(data)
-          this.datos_Api_Test2 = data;
+          ;
           resolve();
         },
         (error) => {
@@ -101,8 +99,7 @@ export class LinearRegressionComponent implements OnInit {
       return new Promise<void>((resolve, reject) => {
         this.testService.getTest3().subscribe(
           (data: any) => {
-            console.log(data)
-            this.datos_Api_Test3 = data;
+            ;
             resolve();
           },
           (error) => {
@@ -117,8 +114,7 @@ export class LinearRegressionComponent implements OnInit {
         return new Promise<void>((resolve, reject) => {
           this.testService.getTest4().subscribe(
             (data: any) => {
-              console.log(data)
-              this.datos_Api_Test4 = data;
+              ;
               resolve();
             },
             (error) => {
@@ -129,4 +125,24 @@ export class LinearRegressionComponent implements OnInit {
         });
         }
 
+}
+
+export function sum(data: number[]): number {
+  return data.reduce((acc, value) => acc + value, 0);
+}
+
+export function sumXY(x: number[], y: number[]): number {
+  return sum(x.map((value, index) => value * y[index]));
+}
+
+export function sumX(x: number[]): number {
+  return sum(x);
+}
+
+export function sumYY(y: number[]): number {
+  return sum(y.map((value) => value * value));
+}
+
+export function sumXX(x: number[]): number {
+  return sum(x.map((value) => value * value));
 }

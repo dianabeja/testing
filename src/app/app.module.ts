@@ -7,6 +7,7 @@ import { MediaComponent } from './media/media.component';
 import { HttpClientModule } from '@angular/common/http';
 import { StddevComponent } from './stddev/stddev.component';
 import { LinearRegressionComponent } from './linear-regression/linear-regression.component';
+import { CorrelationComponent } from './correlation/correlation.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { LinearRegressionComponent } from './linear-regression/linear-regression
     AppComponent,
     MediaComponent,
     StddevComponent,
-    LinearRegressionComponent
+    LinearRegressionComponent,
+    CorrelationComponent
   ],
   imports: [
     BrowserModule,
