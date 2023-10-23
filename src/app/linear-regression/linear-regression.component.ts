@@ -130,3 +130,23 @@ export class LinearRegressionComponent implements OnInit {
         }
 
 }
+
+export function sum(data: number[]): number {
+  return data.reduce((acc, value) => acc + value, 0);
+}
+
+export function sumXY(x: number[], y: number[]): number {
+  return sum(x.map((value, index) => value * y[index]));
+}
+
+export function sumX(x: number[]): number {
+  return sum(x);
+}
+
+export function sumYY(y: number[]): number {
+  return sum(y.map((value) => value * value));
+}
+
+export function sumXX(x: number[]): number {
+  return sum(x.map((value) => value * value));
+}
