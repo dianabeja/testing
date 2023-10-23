@@ -17,8 +17,7 @@ describe('CorrelationComponent', () => {
 
   beforeEach(async () => {
 
-
-    mockTestService = jasmine.createSpyObj('TestService', ['obtenerDatos1', 'obtenerDatos2', 'obtenerDatos3', 'obtenerDatos4']);
+    mockTestService = jasmine.createSpyObj('TestService', ['getTest1', 'getTest2', 'getTest3', 'getTest4']);
     const datosTest = {
       proxy_size: [130, 650, 99, 150, 128, 302, 95, 945, 368, 961],
       actual_added: [186, 699, 132, 272, 291, 331, 199, 1890, 788, 1601],
@@ -73,8 +72,8 @@ describe('CorrelationComponent', () => {
       component.datos_Api_Test1.actual_added
     );
 
+    console.log(r)
     expect(r).toBeCloseTo(0.9545, 4);
-
   })
 
   it('Should return rr=0.9111 with the dataset Data_Test1', () => {
@@ -85,7 +84,6 @@ describe('CorrelationComponent', () => {
     );
 
     let rr = component.rr(r);
-
     expect(rr).toBeCloseTo(0.9111, 4);
 
   })

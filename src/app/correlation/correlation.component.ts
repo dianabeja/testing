@@ -19,7 +19,7 @@ export class CorrelationComponent implements OnInit {
 
   ngOnInit(): void {
    this.testService.getTest1().subscribe((data: any) => {
-
+    console.log(data)
       this.datos_Api_Test1 = data;
     })
     this.testService.getTest2().subscribe((data: any) => {
