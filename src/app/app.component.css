@@ -1,56 +1,56 @@
-/* Estilos generales del contenedor */
-.Contenedor_Principal {
+body {
+    font-family: 'Arial', sans-serif;
+    color: #fff; /* Color de texto blanco */
+  }
+  
+  .contenedor {
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 2rem;
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  
+  .Titulo__calculadora {
+    color: #B697DD; /* Color de texto blanco */
+    background-color: #D9D9D9;
+    border-radius: 25px;
+    padding: 25px;
+    width: 325px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  }
+  
+  
+  .Botones_Group {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100%; /* Esto hará que el contenedor ocupe toda la altura de la pantalla */
-    background-color: #f5f5f5; /* Color claro de fondo */
-}
+    margin-top: 20px;
+  }
+  
+  .Botones_Group button {
+    padding: 10px;
+    width: 125px;
+    height: 70px;
+    font-size: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: #D9D9D9;
+    color: #B697DD; /* Color de texto blanco */
+    border: none;
+    border-radius: 25px;
+    margin: 0 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
 
-.Contenedor_Secundario {
-    margin-top: 5%;
+  }
+ 
+  .Botones_Group button:hover {
+    background-color: #B697DD;
+     color: white;
+     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
-    width: 60%; /* Ocupa el 80% del ancho de su contenedor padre */
-
-    max-width: 1200px; /* Ancho máximo para grandes pantallas */
-    background-color: #ffffff; /* Color blanco para el fondo */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Sombra para dar profundidad */
-    border-radius: 10px; /* Esquinas ligeramente redondeadas */
-    overflow: hidden; /* Asegura que nada se salga del contenedor */
-    padding: 20px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-td {
-    vertical-align: top;
-    padding: 15px;
-}
-
-/* Iconos FontAwesome */
-i.fa {
-    color: #A5A5A5;
-    font-size: 18px;
-    margin-right: 10px;
-}
-
-/* Colocamos el estilo de los componentes insertados en el HTML. 
-   Ajusta estos estilos si necesitas cambios específicos en esos componentes. */
-app-header {
-    display: block;
-    width: 100%;
-}
-
-app-work-experience {
-    display: block;
-    width: 100%;
-}
-
-app-app-skills{
-    display: block;
-    width: 100%;
 }
 
