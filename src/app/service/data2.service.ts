@@ -18,7 +18,7 @@ export class DataService2 {
     })
   }
 
-  getMedia():Observable<any>{
+  gethours():Observable<any>{
     return this.http.get<any>(this.apiURL,this.httpoptions)
   }
   

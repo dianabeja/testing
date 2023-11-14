@@ -67,7 +67,7 @@ describe('StddevComponent', () => {
     const testData = {
       data: [15.0, 69.9, 6.5, 22.4, 28.4, 65.9, 19.4, 198.7, 38.8, 138.2],
     };
-    dataServiceMock.getMedia.and.returnValue(of(testData));
+    dataServiceMock.gethours.and.returnValue(of(testData));
 
     await component.getHours();
 

@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
+<html lang="es" *ngIf="!Mostrar_Pantalla">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,7 +12,7 @@
         </header>
 
         <section class=" Botones_Group">
-          <button onclick="abrirOtraPagina()">1a</button>
+          <button routerLink="/1a" (click)="Ocultar()">1a</button>
           <button>3a</button>
           <button>5a</button>
 
@@ -22,3 +21,6 @@
     </main>
   </body>
 </html>
+
+<router-outlet *ngIf="Mostrar_Pantalla"> </router-outlet>
+

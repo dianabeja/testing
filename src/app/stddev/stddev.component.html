@@ -1,23 +1,20 @@
-<div class="contenedor-flex">
-    <div class="Caja sombra" *ngIf="numbers_hours && numbers_hours.length">
-        <h3>Números obtenidos de Hours:</h3>
-        <ul>
-          <li *ngFor="let number of numbers_hours">{{ number }}</li>
-        </ul>
-      
-        <h3>Media de los números:</h3>
-        <p>{{ desviacion_hours }}</p>
-    </div>
-    
-    <div class="Caja sombra" *ngIf="numbers_size && numbers_size.length">
-        <h3>Números obtenidos de Size:</h3>
-        <ul>
-          <li *ngFor="let number of numbers_size">{{ number }}</li>
-        </ul>
-      
-        <h3>Media de los números:</h3>
-        <p>{{ desviacion_size }}</p>
-    </div>
-    </div>
-    
-      
+<html lang="es" *ngIf="!Mostrar_Pantalla">
+  <div class="contenedor1">
+    <section class="Botones_Group">
+      <button class="boton_atras" routerLink="/inicio" (click)="Ocultar()"><</button>
+      <button (click)="calcularMedia(array_elegido)" class="boton_media">Media</button>
+      <button  (click)="calcularDesviacion(array_elegido)" class="boton_stddev">Stddev</button>
+    </section>
+
+    <section class="Botones_Group2">
+      <button (click)="getSize()" class="boton_size">1a_proxy_size</button>
+      <button (click)="getHours()" class="boton_hours">1a_dev_hours</button>
+      <div class="texto">El resultado es:  </div>
+      <div class="result">{{resultado}}</div>
+    </section>
+  </div>
+
+</html>
+
+<router-outlet *ngIf="Mostrar_Pantalla"> </router-outlet>
+

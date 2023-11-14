@@ -29,7 +29,7 @@ describe('DataService', () => {
     //Url de la api a la que se va a mandar a llamar
     const url = 'https://apicv-service-dianabeja.cloud.okteto.net/hours';
     //Se verifica que la variable data no esté vacia al llamado de la api
-    service.getMedia().subscribe((data) => {
+    service.gethours().subscribe((data) => {
       expect(data).not.toBeNull();
       expect(data).toBeDefined();
     });
