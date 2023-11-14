@@ -20,10 +20,6 @@ export class DataService2 {
 
   getMedia():Observable<any>{
     return this.http.get<any>(this.apiURL,this.httpoptions)
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-    )
   }
   
   handleError(error: any){

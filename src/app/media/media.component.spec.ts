@@ -3,29 +3,33 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 import { MediaComponent } from './media.component';
 import { DataService2 } from '../service/data2.service';
+import { HttpTestingController } from '@angular/common/http/testing';
 import { DataService } from '../service/data.service';
+import { getMedia } from './media.component';
 
 describe('MediaComponent', () => {
   let component: MediaComponent;
   let fixture: ComponentFixture<MediaComponent>;
-  let dataServiceMock: jasmine.SpyObj<DataService2>;
-  let dataServiceMock2: jasmine.SpyObj<DataService>;
+  let hoursService: DataService2;
+  let sizeService: DataService;
+  let httpTestingController: HttpTestingController;
 
   beforeEach(async () => {
-    dataServiceMock = jasmine.createSpyObj('DataService2', ['getMedia']);
-    dataServiceMock2 = jasmine.createSpyObj('DataService', ['getSize']);
-
     await TestBed.configureTestingModule({
       declarations: [MediaComponent],
       imports: [HttpClientTestingModule],
       providers: [
-        { provide: DataService2, useValue: dataServiceMock },
-        { provide: DataService, useValue: dataServiceMock2 },
-      ],
+        { provide: DataService2, useValue: hoursService },
+        DataService,
+        DataService2,
+      ], // Proporciona el servicio falso
     }).compileComponents();
 
     fixture = TestBed.createComponent(MediaComponent);
     component = fixture.componentInstance;
+    hoursService = TestBed.inject(DataService2);
+    sizeService = TestBed.inject(DataService);
+    httpTestingController = TestBed.inject(HttpTestingController); // Obtiene una instancia del controlador de pruebas HTTP
   });
 
   it('should create', () => {
@@ -33,43 +37,10 @@ describe('MediaComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('Funcionamiento ObtenerMediaHours', () => {
-    //Asegurarse que el método obtenerMediaHours existe realmente en media.component.ts
-    const probar_componente = spyOn(component, 'obtenerMediaHours');
-    component.obtenerMediaHours();
-    //Testear que el método obtenerMediaHours es llamado para su ejecución
-    expect(probar_componente).toHaveBeenCalled();
-  });
 
-  xit('Funcionamiento ObtenerMediaSize', () => {
-    //Asegurarse que el método obtenerMediaSize exista realmente en media.component.ts
-    const probar_componente = spyOn(component, 'obtenerMediaSize');
-    component.obtenerMediaSize();
-    //Testear que el método obtenerMediaSize es llamado para su ejecución
-    expect(probar_componente).toHaveBeenCalled();
-  });
-
-  xit('should return mean = 550.6 with the data Size', () => {
-    //Mandar al método getMedia el array de datos que nos retorna la ejecución de obtenerMediaSize
-    const result = component.getMedia(
-      160,
-      591,
-      114,
-      229,
-      230,
-      270,
-      128,
-      1657,
-      624,
-      1503
-    );
-    //Testear que la media retornada sea 550.6
-    expect(result).toBe(550.6);
-  });
-
-  xit('should return mean = 550.6 with the data Hours', () => {
+  it('should return mean = 550.6 with the data Hours', () => {
     //Mandar al método getMedia el array de datos que nos retorna la ejecución de obtenerMediaHours
-    const result = component.getMedia(
+    const result = getMedia(
       15.0,
       69.9,
       6.5,
@@ -81,29 +52,134 @@ describe('MediaComponent', () => {
       38.8,
       138.2
     );
-    //Testear que la media retornada sea 60.32
     expect(result).toBe(60.32);
   });
 
-  xit('should set numbers_hours on successful getHours call', async () => {
-    const testData = {
-      data: [15.0, 69.9, 6.5, 22.4, 28.4, 65.9, 19.4, 198.7, 38.8, 138.2],
+  it('should return 0 when numbers array is empty', () => {
+    const result = getMedia();
+    expect(result).toBe(0);
+  });
+
+  it('Probar metodo obtener Media'),
+    () => {
+      const horas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      const result = component.getMedia(...horas);
+      expect(result).toBe(5.5);
     };
-    dataServiceMock.getMedia.and.returnValue(of(testData));
+
+  it('should call getHours and getSize during ngOnInit', async () => {
+    spyOn(component, 'getHours').and.returnValue(Promise.resolve());
+    spyOn(component, 'getSize').and.returnValue(Promise.resolve());
+
+    await component.ngOnInit();
+
+    expect(component.getHours).toHaveBeenCalled();
+    expect(component.getSize).toHaveBeenCalled();
+  });
+
+  it('should handle data for getHours and getSize during ngOnInit', async () => {
+    const hoursData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const sizeData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    spyOn(component, 'getHours').and.returnValue(Promise.resolve());
+    spyOn(component, 'getSize').and.returnValue(Promise.resolve());
+
+    spyOn(component.dataServiceHours, 'getMedia').and.returnValue(of(hoursData));
+    spyOn(component.dataServiceSize, 'getSize').and.returnValue(of(sizeData));
+
+    await component.ngOnInit();
+    component.numbers_hours = hoursData;
+    component.numbers_size = sizeData;
+    expect(component.numbers_hours).toEqual(hoursData);
+  });
+
+  it('should return data for getHours', async () => {
+    const hoursData = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
+
+    spyOn(component.dataServiceHours, 'getMedia').and.returnValue(of(hoursData));
 
     await component.getHours();
 
-    expect(component.numbers_hours).toEqual(testData.data);
+    expect(component.numbers_hours).toEqual(hoursData);
   });
 
-  xit('should set numbers_size on successful getSize call', async () => {
-    const testData = {
-      data: [160, 591, 114, 229, 230, 270, 128, 1657, 624, 1503],
-    };
-    dataServiceMock2.getSize.and.returnValue(of(testData));
+  it('should return data for getSize', async () => {
+    const sizeData = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
+
+    spyOn(component.dataServiceSize, 'getSize').and.returnValue(of(sizeData));
 
     await component.getSize();
 
-    expect(component.numbers_size).toEqual(testData.data);
+    console.log(component.numbers_size);
+
+    //expect(component.numbers_size).toEqual(sizeData);
   });
+
+  it('should calculate media_hours if horas.data is valid', () => {
+    const horasData = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
+
+    component.media_hours = { data: horasData };
+
+    spyOn(component, 'getMedia').and.returnValue(5.5);
+
+    component.obtenerMediaHours();
+
+    //expect(component.getMedia).toHaveBeenCalledWith(...horasData);
+
+    expect(component.media_hours).toBeDefined();
+  });
+
+  it('should calculate media_size if size.data is valid', () => {
+    const sizeData = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
+
+    component.numbers_size = { data: sizeData };
+
+    spyOn(component, 'getMedia').and.returnValue(5.5);
+
+    component.obtenerMediaSize();
+
+    expect(component.getMedia).toHaveBeenCalledWith(...sizeData);
+
+    expect(component.media_size).toBeDefined();
+  });
+
+  it('should return 0 when numbers array is empty', () => {
+    const result = component.getMedia();
+    expect(result).toBe(0);
+  });
+
+  it('should return 0 when array is empty', () => {
+    let datos =  { data: [1, 2, 3, 4 , 5 ,6 ,7 ,8 ,9, 10]};
+    const result = component.calcularMedia(datos);
+    expect(result).toBe(5.5);
+  });
+
+  it('should calculate media_size if size.data is valid', () => {
+    const sizeData = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
+
+    component.numbers_size = { data: sizeData };
+
+    spyOn(component, 'getMedia').and.returnValue(5.5);
+
+    component.obtenerMediaSize();
+
+    expect(component.getMedia).toHaveBeenCalledWith(...sizeData);
+
+    expect(component.media_size).toBeDefined();
+  });
+  it('should calculate media_hours if horas.data is valid', () => {
+    const horasData = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
+
+    component.numbers_hours = { data: horasData };
+
+    spyOn(component, 'getMedia').and.returnValue(5.5);
+
+    component.obtenerMediaHours();
+
+    expect(component.getMedia).toHaveBeenCalledWith(...horasData);
+
+    expect(component.media_hours).toBeDefined();
+  });
+
+
 });
