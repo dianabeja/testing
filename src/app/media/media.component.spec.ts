@@ -93,7 +93,6 @@ describe('MediaComponent', () => {
     expect(component.numbers_hours).toEqual(hoursData);
   });
 
-  
   it('should return data for getHours', async () => {
     const hoursData = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
 
