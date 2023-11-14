@@ -52,7 +52,6 @@ describe('MediaComponent', () => {
       38.8,
       138.2
     );
-    //Testear que la media retornada sea 60.32
     expect(result).toBe(60.32);
   });
 
