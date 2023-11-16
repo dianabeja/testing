@@ -22,15 +22,5 @@ export class DataService {
     return this.http.get<any>(this.apiURL,this.httpoptions)
 
   }
-  
-  handleError(error: any){
-    let errorMessaje= '';
-    if(error.error instanceof ErrorEvent){
-      errorMessaje= error.error.message;
-    }else {
-      errorMessaje = `Error code: ${error.status}\n messaje: ${error.message}`
-    }
-    console.error(errorMessaje);
-    return (errorMessaje);
-  }
+
 }

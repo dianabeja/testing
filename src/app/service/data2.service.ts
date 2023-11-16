@@ -18,18 +18,7 @@ export class DataService2 {
     })
   }
 
-  getMedia():Observable<any>{
+  gethours():Observable<any>{
     return this.http.get<any>(this.apiURL,this.httpoptions)
-  }
-  
-  handleError(error: any){
-    let errorMessaje= '';
-    if(error.error instanceof ErrorEvent){
-      errorMessaje= error.error.messaje;
-    }else {
-      errorMessaje = `Error code: ${error.status}\n messaje: ${error.messaje}`
-    }
-    window.alert(errorMessaje);
-    return throwError(errorMessaje);
   }
 }

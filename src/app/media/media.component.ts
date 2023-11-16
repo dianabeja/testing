@@ -30,7 +30,7 @@ export class MediaComponent implements OnInit {
 
   async getHours() {
     return new Promise<void>((resolve, reject) => {
-      this.dataServiceHours.getMedia().subscribe((data: any[]) => {
+      this.dataServiceHours.gethours().subscribe((data: any[]) => {
         this.numbers_hours = data;
         this.array_elegido = data;
         resolve();

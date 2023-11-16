@@ -34,14 +34,4 @@ export class TestService {
     return this.http.get<any>(this.apiURL+'test4',this.httpoptions)
   }
   
-  handleError(error: any){
-    let errorMessaje= '';
-    if(error.error instanceof ErrorEvent){
-      errorMessaje= error.error.messaje;
-    }else {
-      errorMessaje = `Error code: ${error.status}\n messaje: ${error.messaje}`
-    }
-    window.alert(errorMessaje);
-    return throwError(errorMessaje);
-  }
 }

@@ -84,7 +84,7 @@ describe('MediaComponent', () => {
     spyOn(component, 'getHours').and.returnValue(Promise.resolve());
     spyOn(component, 'getSize').and.returnValue(Promise.resolve());
 
-    spyOn(component.dataServiceHours, 'getMedia').and.returnValue(of(hoursData));
+    spyOn(component.dataServiceHours, 'gethours').and.returnValue(of(hoursData));
     spyOn(component.dataServiceSize, 'getSize').and.returnValue(of(sizeData));
 
     await component.ngOnInit();
@@ -96,7 +96,7 @@ describe('MediaComponent', () => {
   it('should return data for getHours', async () => {
     const hoursData = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
 
-    spyOn(component.dataServiceHours, 'getMedia').and.returnValue(of(hoursData));
+    spyOn(component.dataServiceHours, 'gethours').and.returnValue(of(hoursData));
 
     await component.getHours();
 

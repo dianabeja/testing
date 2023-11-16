@@ -41,9 +41,7 @@ export class SimpsonComponent {
             PF = t(dof,num_seg,x1);
             
             return PF
-          } else {
-            xC = fx_2x(x);
-          } 
+          }
 
           if (i == 0 || i == num_seg) {
             y = xC * 1;
