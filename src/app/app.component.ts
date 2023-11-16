@@ -5,8 +5,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'testing_pruebas';
-
   public Mostrar_Pantalla: boolean = false;
 
   Ocultar() {

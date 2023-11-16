@@ -51,7 +51,6 @@ export class StddevComponent implements OnInit {
 
   async getSize() {
     this.array_elegido = await this.dataServiceSize.getSize().toPromise();
-    console.log(this.array_elegido);
     return new Promise<void>((resolve, reject) => {
       this.dataServiceSize.getSize().subscribe(
         (data: any) => {
@@ -70,12 +69,7 @@ export class StddevComponent implements OnInit {
     ) {
       const media = getMedia(...this.numbers_size);
       this.desviacion_size = this.getStddev(this.numbers_size, media);
-      console.log(this.desviacion_size);
-    } else {
-      console.log(
-        'No hay datos disponibles para calcular la desviación estándar de size.'
-      );
-    }
+    } 
   }
 
   async obtenerStddevHours() {
@@ -86,12 +80,7 @@ export class StddevComponent implements OnInit {
     ) {
       const media = getMedia(...this.numbers_hours);
       this.desviacion_hours = this.getStddev(this.numbers_hours, media);
-      console.log(this.desviacion_hours);
-    } else {
-      console.log(
-        'No hay datos disponibles para calcular la desviación estándar de horas.'
-      );
-    }
+    } 
   }
 
   getStddev(arreglo: number[], media: number): number {
@@ -107,14 +96,18 @@ export class StddevComponent implements OnInit {
   }
 
   calcularMedia(array: number[] | any) {
-    const result = getMedia(...array.data);
+    const dataArray = Array.isArray(array) ? array : (array.data || []);
+
+    const result = getMedia(...dataArray);
     this.resultado = result;
     return result;
   }
 
   calcularDesviacion(array: number[] | any) {
-    const media = getMedia(...array.data);
-    const result = this.getStddev(array.data, media);
+    const dataArray = Array.isArray(array) ? array : (array.data || []);
+
+    const media = getMedia(...dataArray);
+    const result = this.getStddev(dataArray, media);
     this.resultado = result;
     return result;
   }

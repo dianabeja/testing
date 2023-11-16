@@ -4,6 +4,7 @@ import { LinearRegressionComponent } from './linear-regression.component';
 import { TestService } from '../service/datatest1.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
+import { sum, sumX, sumXX, sumXY, sumYY } from './linear-regression.component';
 
 describe('LinearRegressionComponent', () => {
   let component: LinearRegressionComponent;
@@ -59,7 +60,7 @@ describe('LinearRegressionComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('Should return B0=-22.55 with the dataset Data_Test1', () => {
+  it('Should return B0=-22.55 with the dataset Data_Test1', () => {
     const B0 = component.B0(
       component.datos_Api_Test1.proxy_size,
       component.datos_Api_Test1.actual_added
@@ -67,7 +68,7 @@ describe('LinearRegressionComponent', () => {
     expect(B0).toBeCloseTo(-22.55, 2);
   });
 
-  xit('Should return B1=1.7279 with the dataset Data_Test1', async () => {
+  it('Should return B1=1.7279 with the dataset Data_Test1', async () => {
     const B1 = component.B1(
       component.datos_Api_Test1.proxy_size,
       component.datos_Api_Test1.actual_added
@@ -75,7 +76,7 @@ describe('LinearRegressionComponent', () => {
     expect(B1).toBeCloseTo(1.7279, 4);
   });
 
-  xit('Should return yk=644.429 with the dataset Data_Test1 if x=386', () =>{
+  it('Should return yk=644.429 with the dataset Data_Test1 if x=386', () =>{
     const yk = component.yk(
       component.datos_Api_Test1.proxy_size,
       component.datos_Api_Test1.actual_added,
@@ -84,7 +85,7 @@ describe('LinearRegressionComponent', () => {
     expect(yk).toBeCloseTo(644.429, 3);
   })
 
-  xit('Should return B0=-4.039 with the dataset Data_Test2', () =>{
+  it('Should return B0=-4.039 with the dataset Data_Test2', () =>{
     const B0 = component.B0(
       component.datos_Api_Test2.proxy_size,
       component.datos_Api_Test2.actual_develop
@@ -92,7 +93,7 @@ describe('LinearRegressionComponent', () => {
     expect(B0).toBeCloseTo(-4.039, 3);
   })
 
-  xit('Should return B1=0.1681 with the dataset Data_Test2', () =>{
+  it('Should return B1=0.1681 with the dataset Data_Test2', () =>{
     const B1 = component.B1(
       component.datos_Api_Test2.proxy_size,
       component.datos_Api_Test2.actual_develop
@@ -100,7 +101,7 @@ describe('LinearRegressionComponent', () => {
     expect(B1).toBeCloseTo(0.1681, 4);
   })
 
-  xit('Should return yk=60.858 with the dataset Data_Test2 if x=386', () =>{
+  it('Should return yk=60.858 with the dataset Data_Test2 if x=386', () =>{
     const yk = component.yk(
       component.datos_Api_Test2.proxy_size,
       component.datos_Api_Test2.actual_develop,
@@ -109,7 +110,7 @@ describe('LinearRegressionComponent', () => {
     expect(yk).toBeCloseTo(60.858, 3);
   })
 
-  xit('Should return B0=-23.92 with the dataset Data_Test3', () =>{
+  it('Should return B0=-23.92 with the dataset Data_Test3', () =>{
     const B0 = component.B0(
       component.datos_Api_Test3.plan_added,
       component.datos_Api_Test3.actual_added
@@ -117,7 +118,7 @@ describe('LinearRegressionComponent', () => {
     expect(B0).toBeCloseTo(-23.92, 2);
   })
 
-  xit('Should return B1=1.43097 with the dataset Data_Test3  ', () =>{
+  it('Should return B1=1.43097 with the dataset Data_Test3  ', () =>{
     const B1 = component.B1(
       component.datos_Api_Test3.plan_added,
       component.datos_Api_Test3.actual_added
@@ -125,7 +126,7 @@ describe('LinearRegressionComponent', () => {
     expect(B1).toBeCloseTo(1.43097, 5);
   })
 
-  xit('Should return yk=528.4294 with the dataset Data_Test3 if x=386  ', () =>{
+  it('Should return yk=528.4294 with the dataset Data_Test3 if x=386  ', () =>{
     const yk = component.yk(
       component.datos_Api_Test3.plan_added,
       component.datos_Api_Test3.actual_added,
@@ -134,7 +135,7 @@ describe('LinearRegressionComponent', () => {
     expect(yk).toBeCloseTo(528.4294, 4);
   })
 
-  xit(' Should return B0=-4.604 with the dataset Data_Test4  ', () =>{
+  it(' Should return B0=-4.604 with the dataset Data_Test4  ', () =>{
     const B0 = component.B0(
       component.datos_Api_Test4.proxy_added,
       component.datos_Api_Test4.actual_develop
@@ -142,7 +143,7 @@ describe('LinearRegressionComponent', () => {
     expect(B0).toBeCloseTo(-4.604, 3);
   })
 
-  xit(' Should return B1=0.14016 with the dataset Data_Test4  ', () =>{
+  it(' Should return B1=0.14016 with the dataset Data_Test4  ', () =>{
     const B1 = component.B1(
       component.datos_Api_Test4.proxy_added,
       component.datos_Api_Test4.actual_develop
@@ -150,7 +151,7 @@ describe('LinearRegressionComponent', () => {
     expect(B1).toBeCloseTo(0.14016, 4);
   })
 
-  xit('Should return yk=49.4994 with the dataset Data_Test4 if x=386', () =>{
+  it('Should return yk=49.4994 with the dataset Data_Test4 if x=386', () =>{
     const yk = component.yk(
       component.datos_Api_Test4.proxy_added,
       component.datos_Api_Test4.actual_develop,
@@ -158,4 +159,37 @@ describe('LinearRegressionComponent', () => {
     );
     expect(yk).toBeCloseTo(49.4994, 4);
   })
+  
+
+  it('should calculate sumXX correctly', () => {
+    const x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const result = sumXX(x);
+    expect(result).toBeDefined();
+
+  });
+
+  it('should calculate sumY correctly', () => {
+    const y = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const result = sum(y);
+    expect(result).toBeDefined();
+  });
+
+  it('should calculate sumY correctly', () => {
+    const y = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const result = sumYY(y);
+    expect(result).toBeDefined();
+  });
+
+  it('should calculate sumY correctly', () => {
+    const y = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const result = sumXY(y, x);
+    expect(result).toBeDefined();
+  });
+  it('should calculate sumY correctly', () => {
+    const x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const result = sumX(x);
+    expect(result).toBeDefined();
+  });
+  
 });

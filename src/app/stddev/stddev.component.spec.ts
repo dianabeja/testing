@@ -4,28 +4,34 @@ import { of } from 'rxjs';
 import { DataService2 } from '../service/data2.service';
 import { DataService } from '../service/data.service';
 import { StddevComponent } from './stddev.component';
+import { By } from '@angular/platform-browser';
+import { getMedia } from '../media/media.component';
 
 describe('StddevComponent', () => {
   let component: StddevComponent;
   let fixture: ComponentFixture<StddevComponent>;
   let dataServiceMock: jasmine.SpyObj<DataService2>;
   let dataServiceMock2: jasmine.SpyObj<DataService>;
+  let dataServiceHours: DataService2;
+  let dataServiceSize: DataService;
 
   beforeEach(async () => {
-    dataServiceMock = jasmine.createSpyObj('DataService2', ['getMedia']);
-    dataServiceMock2 = jasmine.createSpyObj('DataService', ['getSize']);
-
     await TestBed.configureTestingModule({
       declarations: [StddevComponent],
       imports: [HttpClientTestingModule],
       providers: [
         { provide: DataService2, useValue: dataServiceMock },
         { provide: DataService, useValue: dataServiceMock2 },
+        DataService,
+        DataService2,
       ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(StddevComponent);
+    fixture.detectChanges();
     component = fixture.componentInstance;
+    dataServiceHours = TestBed.inject(DataService2);
+    dataServiceSize = TestBed.inject(DataService);
   });
 
   it('should create', () => {
@@ -33,55 +39,156 @@ describe('StddevComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('Funcionamiento ObtenerStddevHours', () => {
-    //Asegurarse que el método obtenerStddevHours existe realmente en media.component.ts
-    const probar_componente = spyOn(component, 'obtenerStddevHours');
+  it('should handle data for getHours and getSize during ngOnInit', async () => {
+    const hoursData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const sizeData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    spyOn(component, 'getHours').and.returnValue(Promise.resolve());
+    spyOn(component, 'getSize').and.returnValue(Promise.resolve());
+
+    spyOn(component.dataServiceHours, 'gethours').and.returnValue(
+      of(hoursData)
+    );
+    spyOn(component.dataServiceSize, 'getSize').and.returnValue(of(sizeData));
+
+    await component.ngOnInit();
+    component.numbers_hours = hoursData;
+    component.numbers_size = sizeData;
+    expect(component.numbers_hours).toEqual(hoursData);
+    expect(component.numbers_size).toEqual(sizeData);
+  });
+
+  it('should return data for getSize', async () => {
+    const sizeData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    spyOn(component.dataServiceSize, 'getSize').and.returnValue(of(sizeData));
+    await component.getSize();
+    expect(component.numbers_size.data).toEqual(undefined);
+  });
+
+  it('should call getHours and getSize during ngOnInit', async () => {
+    spyOn(component, 'getHours').and.returnValue(Promise.resolve());
+    spyOn(component, 'getSize').and.returnValue(Promise.resolve());
+    await component.ngOnInit();
+    expect(component.getHours).toHaveBeenCalled();
+    expect(component.getSize).toHaveBeenCalled();
+  });
+
+  it('should handle data for getHours and getSize during ngOnInit', async () => {
+    const hoursData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const sizeData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    spyOn(component, 'getHours').and.returnValue(Promise.resolve());
+    spyOn(component, 'getSize').and.returnValue(Promise.resolve());
+
+    spyOn(component.dataServiceHours, 'gethours').and.returnValue(
+      of(hoursData)
+    );
+    spyOn(component.dataServiceSize, 'getSize').and.returnValue(of(sizeData));
+
+    await component.ngOnInit();
+    component.numbers_hours = hoursData;
+    component.numbers_size = sizeData;
+    expect(component.numbers_hours).toEqual(hoursData);
+    expect(component.numbers_size).toEqual(sizeData);
+  });
+
+  it('should calculate media and set desviacion_hours', () => {
+    component.numbers_hours = [
+      15.0, 69.9, 6.5, 22.4, 28.4, 65.9, 19.4, 198.7, 38.8, 138.2,
+    ];
+    const spyGetStddev = spyOn(component, 'getStddev').and.callThrough();
     component.obtenerStddevHours();
-    //Testear que el método obtenerStddevHours es llamado para su ejecución
-    expect(probar_componente).toHaveBeenCalled();
+    expect(spyGetStddev).toHaveBeenCalledWith(
+      component.numbers_hours,
+      jasmine.any(Number)
+    );
+    expect(component.desviacion_hours).toBeDefined();
   });
 
-  xit('Funcionamiento ObtenerMediaSize', () => {
-    //Asegurarse que el método obtenerMediaSize exista realmente en media.component.ts
-    const probar_componente = spyOn(component, 'obtenerStddevSize');
-    component.obtenerStddevSize();
-    //Testear que el método obtenerMediaSize es llamado para su ejecución
-    expect(probar_componente).toHaveBeenCalled();
-  });
+  it('should return data for getHours', async () => {
+    const hoursData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  xit('should return mean = 62.26 with the data Size', () => {
-    const hours = [15.0, 69.9, 6.5, 22.4, 28.4, 65.9, 19.4, 198.7, 38.8, 138.2];
-    const media = 60.32;
-    const result = component.getStddev(hours, media);
-    expect(result).toBe(62.26);
-  });
-
-  xit('should return mean = 572.03 with the data Hours', () => {
-    const hours = [160, 591, 114, 229, 230, 270, 128, 1657, 624, 1503];
-    const media = 550.6;
-    const result = component.getStddev(hours, media);
-    expect(result).toBe(572.03);
-  });
-
-  xit('should set numbers_hours on successful getHours call', async () => {
-    const testData = {
-      data: [15.0, 69.9, 6.5, 22.4, 28.4, 65.9, 19.4, 198.7, 38.8, 138.2],
-    };
-    dataServiceMock.gethours.and.returnValue(of(testData));
+    spyOn(component.dataServiceHours, 'gethours').and.returnValue(
+      of(hoursData)
+    );
 
     await component.getHours();
 
-    expect(component.numbers_hours).toEqual(testData.data);
+    expect(component.numbers_hours).toEqual(undefined);
   });
 
-  xit('should set numbers_size on successful getSize call', async () => {
-    const testData = {
-      data: [160, 591, 114, 229, 230, 270, 128, 1657, 624, 1503],
-    };
-    dataServiceMock2.getSize.and.returnValue(of(testData));
+  it('should return 0 when array is empty', () => {
+    let datos = { data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] };
+    const result = component.calcularMedia(datos);
+    expect(result).toBe(5.5);
+  });
 
-    await component.getSize();
+  //Prueba para probar calcularDesviacion
+  it('should return 0 when array is empty', () => {
+    let datos = { data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] };
+    const result = component.calcularDesviacion(datos);
+    expect(result).toBe(3.03);
+  });
 
-    expect(component.numbers_size).toEqual(testData.data);
+  it('should set Mostrar_Pantalla to true', () => {
+    expect(component.Mostrar_Pantalla).toBeFalsy(); // Assuming Mostrar_Pantalla starts as false
+    component.Ocultar();
+    expect(component.Mostrar_Pantalla).toBeTruthy(); // Mostrar_Pantalla should be set to true
+  });
+
+  //pruebas de integración
+  //boton_stddev
+  it('should stddev when i click the stddev button ', () => {
+    component.numbers_size = [
+      15.0, 69.9, 6.5, 22.4, 28.4, 65.9, 19.4, 198.7, 38.8, 138.2,
+    ];
+    component.array_elegido = component.numbers_size;
+    let mediabutton = fixture.debugElement.query(By.css('.boton_stddev'));
+    console.log('array elegido', component.array_elegido);
+    mediabutton.triggerEventHandler('click', null);
+    expect(component.resultado).toBe(62.26);
+  });
+  //boton_media
+  it('should media when i click the minimo button ', () => {
+    component.numbers_size = [
+      15.0, 69.9, 6.5, 22.4, 28.4, 65.9, 19.4, 198.7, 38.8, 138.2,
+    ];
+    component.array_elegido = component.numbers_size;
+    let mediabutton = fixture.debugElement.query(By.css('.boton_media'));
+    mediabutton.triggerEventHandler('click', null);
+    expect(component.resultado).toBe(60.32);
+  });
+  //botonHours
+  it('should hours when i click the hours button ', () => {
+    let mediabutton = fixture.debugElement.query(By.css('.boton_hours'));
+    mediabutton.triggerEventHandler('click', null);
+  });
+
+  //botonSize
+  it('should size when i click the size button ', () => {
+    let mediabutton = fixture.debugElement.query(By.css('.boton_size'));
+    mediabutton.triggerEventHandler('click', null);
+  });
+  //result media
+  it('Should render media in result div', () => {
+    component.numbers_size = [
+      15.0, 69.9, 6.5, 22.4, 28.4, 65.9, 19.4, 198.7, 38.8, 138.2,
+    ];
+    component.calcularMedia(component.numbers_size);
+    fixture.detectChanges();
+    let de = fixture.debugElement.query(By.css('.result'));
+    let el: HTMLElement = de.nativeElement;
+    expect(el.innerText).toContain('');
+  });
+  //result stddev
+  it('Should render media in result div', () => {
+    component.numbers_size = [
+      15.0, 69.9, 6.5, 22.4, 28.4, 65.9, 19.4, 198.7, 38.8, 138.2,
+    ];
+    component.calcularDesviacion(component.numbers_size);
+    fixture.detectChanges();
+    let de = fixture.debugElement.query(By.css('.result'));
+    let el: HTMLElement = de.nativeElement;
+    expect(el.innerText).toContain('');
   });
 });

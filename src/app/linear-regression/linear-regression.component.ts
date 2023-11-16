@@ -65,66 +65,6 @@ export class LinearRegressionComponent implements OnInit {
     return this.B0(x, y) + this.B1(x, y) * xk;
   }
 
-  async getObtenerTest1() {
-  return new Promise<void>((resolve, reject) => {
-    this.testService.getTest1().subscribe(
-      (data: any) => {
-        ;
-        resolve();
-      },
-      (error) => {
-        console.error('Error al obtener los datos de horas:', error);
-        reject(error);
-      }
-    );
-  });
-  }
-
-  async getObtenerTest2() {
-    return new Promise<void>((resolve, reject) => {
-      this.testService.getTest2().subscribe(
-        (data: any) => {
-          ;
-          resolve();
-        },
-        (error) => {
-          console.error('Error al obtener los datos de horas:', error);
-          reject(error);
-        }
-      );
-    });
-    }
-
-    async getObtenerTest3() {
-      return new Promise<void>((resolve, reject) => {
-        this.testService.getTest3().subscribe(
-          (data: any) => {
-            ;
-            resolve();
-          },
-          (error) => {
-            console.error('Error al obtener los datos de horas:', error);
-            reject(error);
-          }
-        );
-      });
-      }
-
-      async getObtenerTest4() {
-        return new Promise<void>((resolve, reject) => {
-          this.testService.getTest4().subscribe(
-            (data: any) => {
-              ;
-              resolve();
-            },
-            (error) => {
-              console.error('Error al obtener los datos de horas:', error);
-              reject(error);
-            }
-          );
-        });
-        }
-
 }
 
 export function sum(data: number[]): number {
@@ -144,5 +84,5 @@ export function sumYY(y: number[]): number {
 }
 
 export function sumXX(x: number[]): number {
-  return sum(x.map((value) => value * value));
+  return sum(x.map((value) => value * value));
 }

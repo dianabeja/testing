@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { LinearRegressionComponent } from '../linear-regression/linear-regression.component';
 import { CorrelationComponent } from './correlation.component';
+import { sum, sumX, sumXX, sumXY, sumYY  } from '../linear-regression/linear-regression.component';
 
 import { TestService } from '../service/datatest1.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -65,7 +66,7 @@ describe('CorrelationComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('Should return r=0.9545 with the dataset Data_Test1', () => {
+  it('Should return r=0.9545 with the dataset Data_Test1', () => {
 
     let r = component.FormulaCorrelacion(
       component.datos_Api_Test1.proxy_size,
@@ -76,7 +77,7 @@ describe('CorrelationComponent', () => {
     expect(r).toBeCloseTo(0.9545, 4);
   })
 
-  xit('Should return rr=0.9111 with the dataset Data_Test1', () => {
+  it('Should return rr=0.9111 with the dataset Data_Test1', () => {
 
     let r = component.FormulaCorrelacion(
       component.datos_Api_Test1.proxy_size,
@@ -88,7 +89,7 @@ describe('CorrelationComponent', () => {
 
   })
 
-  xit('Should return r=0.9333 with the dataset Data_Test2', () => {
+  it('Should return r=0.9333 with the dataset Data_Test2', () => {
 
     let r = component.FormulaCorrelacion(
       component.datos_Api_Test2.proxy_size,
@@ -99,7 +100,7 @@ describe('CorrelationComponent', () => {
 
   })
 
-  xit('Should return rr=0.8711 with the dataset Data_Test2', () => {
+  it('Should return rr=0.8711 with the dataset Data_Test2', () => {
 
     let r = component.FormulaCorrelacion(
       component.datos_Api_Test2.proxy_size,
@@ -112,7 +113,7 @@ describe('CorrelationComponent', () => {
 
   })
 
-  xit('Should return r=0.9631 with the dataset Data_Test3', () => {
+  it('Should return r=0.9631 with the dataset Data_Test3', () => {
 
     let r = component.FormulaCorrelacion(
       component.datos_Api_Test3.plan_added,
@@ -123,7 +124,7 @@ describe('CorrelationComponent', () => {
 
   })
 
-  xit('Should return rr=0.9276. with the dataset Data_Test3', () => {
+  it('Should return rr=0.9276. with the dataset Data_Test3', () => {
 
     let r = component.FormulaCorrelacion(
       component.datos_Api_Test3.plan_added,
@@ -136,7 +137,7 @@ describe('CorrelationComponent', () => {
 
   })
 
-  xit('Should return r=0.9480 with the dataset Data_Test4', () => {
+  it('Should return r=0.9480 with the dataset Data_Test4', () => {
 
     let r = component.FormulaCorrelacion(
       component.datos_Api_Test4.proxy_added,
@@ -147,7 +148,7 @@ describe('CorrelationComponent', () => {
 
   })
 
-  xit('Should return rr=0.8988 with the dataset Data_Test4', () => {
+  it('Should return rr=0.8988 with the dataset Data_Test4', () => {
 
     let r = component.FormulaCorrelacion(
       component.datos_Api_Test4.proxy_added,
