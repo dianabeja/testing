@@ -4,7 +4,7 @@ import { LinearRegressionComponent } from './linear-regression.component';
 import { TestService } from '../service/datatest1.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
-import { sum, sumX, sumXX, sumXY, sumYY } from './linear-regression.component';
+import { sum, sumX, sumXX, sumXY, sumYY,yk } from './linear-regression.component';
 
 describe('LinearRegressionComponent', () => {
   let component: LinearRegressionComponent;
@@ -189,6 +189,12 @@ describe('LinearRegressionComponent', () => {
   it('should calculate sumY correctly', () => {
     const x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     const result = sumX(x);
+    expect(result).toBeDefined();
+  });
+  it('should calculate sumY correctly', () => {
+    const y = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const result = yk(x,y,386);
     expect(result).toBeDefined();
   });
   

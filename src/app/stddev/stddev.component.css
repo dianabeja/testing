@@ -45,10 +45,13 @@
   color: #b697dd;
 }
 
-.Botones_Group2 button:active {
-    background-color: #B697DD;
-    color: white;
-  }
+.boton_size:not(.boton-activo),
+.boton_hours:not(.boton-activo) {
+  background-color: #d9d9d9;
+  color: #b697dd;
+  /* Otros estilos para el botón inactivo */
+}
+
 .Botones_Group {
   display: flex;
   flex-direction: column;
@@ -96,8 +99,8 @@
   font-size: 30px;
   font-weight: 700;
   cursor: pointer;
-  background-color: #d9d9d9;
-  color: #b697dd; /* Color de texto blanco */
+  background-color: #b697dd;
+  color: white ;
   border: none;
   border-radius: 25px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -110,8 +113,8 @@
   font-size: 30px;
   font-weight: 700;
   cursor: pointer;
-  background-color: #d9d9d9;
-  color: #b697dd;
+  background-color: #b697dd;
+  color: white ; 
   border: none;
   border-radius: 25px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);

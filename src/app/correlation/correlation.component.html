@@ -1,1 +1,35 @@
-<p>correlation works!</p>
+<html lang="es" *ngIf="!Mostrar_Pantalla">
+  <div class="contenedor1">
+    <section class="Botones_Group">
+      <button class="boton_atras" routerLink="/inicio" (click)="Ocultar()"><</button>
+      <button (click)="getTest1(); cambiarEstadoBoton1()" class="boton_test1" [class.boton-activo]="botonActivo1">Test1</button>
+      <button (click)="getTest2(); cambiarEstadoBoton2()" class="boton_test2" [class.boton-activo]="botonActivo2">Test2</button>
+      <button (click)="getTest3(); cambiarEstadoBoton3()" class="boton_test3" [class.boton-activo]="botonActivo3">Test3</button>
+      <button (click)="getTest4(); cambiarEstadoBoton4()" class="boton_test4" [class.boton-activo]="botonActivo4">Test4</button>
+    </section>
+
+    <section class="Botones_Group2">
+      <input
+      class="Input_x"
+      id="x"
+      [(ngModel)]="x"
+      type="number"
+      name="x"
+      placeholder="0.0"
+    />
+      <button (click)="regresion(array_elegido.dato1,array_elegido.dato2)" class="boton_regresion">Regresión lineal</button>
+      <div class="result_b0">b0: {{b0}}</div>
+      <div class="result_b1">b1: {{b1}}</div>
+      <div class="result_yk">yk: {{yk}}</div>
+      <button (click)="FormulaCorrelacion(array_elegido.dato1,array_elegido.dato2);rr(resultR)" class="boton_correlacion">Correlación</button>
+      <div class="result_r_and_rr">
+        <div class="result_r">r: {{resultR}}</div>
+        <div class="result_rr">rr: {{resultRR}}</div>
+      </div>
+    </section>
+  </div>
+
+</html>
+
+<router-outlet *ngIf="Mostrar_Pantalla"> </router-outlet>
+
