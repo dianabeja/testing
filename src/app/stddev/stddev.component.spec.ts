@@ -144,7 +144,6 @@ describe('StddevComponent', () => {
     ];
     component.array_elegido = component.numbers_size;
     let mediabutton = fixture.debugElement.query(By.css('.boton_stddev'));
-    console.log('array elegido', component.array_elegido);
     mediabutton.triggerEventHandler('click', null);
     expect(component.resultado).toBe(62.26);
   });
@@ -191,4 +190,14 @@ describe('StddevComponent', () => {
     let el: HTMLElement = de.nativeElement;
     expect(el.innerText).toContain('');
   });
+
+    it('maneja el caso donde array.data no está definido', () => {
+      const resultado = component.calcularDesviacion({}); // Puedes pasar un objeto vacío o cualquier otro objeto sin la propiedad 'data'
+      expect(resultado).toBe(0); // O ajusta según cómo quieras manejar este caso
+    });
+    it('maneja el caso donde array.data no está definido', () => {
+      const resultado = component.calcularMedia({}); // Puedes pasar un objeto vacío o cualquier otro objeto sin la propiedad 'data'
+      expect(resultado).toBe(0); // O ajusta según cómo quieras manejar este caso
+    });
+  
 });

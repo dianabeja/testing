@@ -11,10 +11,22 @@ import {t} from '../t/t'
 })
 export class SimpsonComponent {
   constructor() {}
+  public Mostrar_Pantalla: boolean = false;
+  f="";
+  x0=0;
+  x1=0;
+  num_seg=0;
+  dof=0
+  error=0
+  result=0;
 
-  simpson(f: string, x0: number, x1: number, num_seg: number, dof: any) {
+  Ocultar() {
+    this.Mostrar_Pantalla = true;
+  }
 
-      let E = 0.00001;
+  simpson(f: string, x0: number, x1: number, num_seg: number, dof: any, error:number) {
+
+      let E = error;
       let x = 0;
       let xC: any;
       let y;
@@ -39,7 +51,7 @@ export class SimpsonComponent {
             xC = fx_1eX(x);
           } else if(f.toLowerCase() == 't') {
             PF = t(dof,num_seg,x1);
-            
+            this.result=PF
             return PF
           }
 
@@ -66,7 +78,7 @@ export class SimpsonComponent {
       if (PF == 0) {
         PF = 1;
       }
-
+      this.result=PF
       return PF;
   }
 }

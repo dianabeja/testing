@@ -39,7 +39,6 @@ export class StddevComponent implements OnInit {
   async getHours() {
     this.array_elegido = await this.dataServiceHours.gethours().toPromise();
     this.array_elegido.data = this.array_elegido.horas;
-    console.log(this.array_elegido)
     return new Promise<void>((resolve, reject) => {
       this.dataServiceHours.gethours().subscribe(
         (data: any) => {
@@ -53,9 +52,6 @@ export class StddevComponent implements OnInit {
   async getSize() {
     this.array_elegido = await this.dataServiceSize.getSize().toPromise();
     this.array_elegido.data = this.array_elegido.data;
-
-    console.log(this.array_elegido)
-
     return new Promise<void>((resolve, reject) => {
       this.dataServiceSize.getSize().subscribe(
         (data: any) => {

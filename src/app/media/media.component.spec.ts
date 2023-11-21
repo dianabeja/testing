@@ -95,51 +95,31 @@ describe('MediaComponent', () => {
 
   it('should return data for getHours', async () => {
     const hoursData = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
-
     spyOn(component.dataServiceHours, 'gethours').and.returnValue(of(hoursData));
-
     await component.getHours();
-
     expect(component.numbers_hours).toEqual(hoursData);
   });
 
   it('should return data for getSize', async () => {
     const sizeData = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
-
     spyOn(component.dataServiceSize, 'getSize').and.returnValue(of(sizeData));
-
     await component.getSize();
-
-    console.log(component.numbers_size);
-
-    //expect(component.numbers_size).toEqual(sizeData);
   });
 
   it('should calculate media_hours if horas.data is valid', () => {
     const horasData = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
-
     component.media_hours = { data: horasData };
-
     spyOn(component, 'getMedia').and.returnValue(5.5);
-
     component.obtenerMediaHours();
-
-    //expect(component.getMedia).toHaveBeenCalledWith(...horasData);
-
     expect(component.media_hours).toBeDefined();
   });
 
   it('should calculate media_size if size.data is valid', () => {
     const sizeData = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
-
     component.numbers_size = { data: sizeData };
-
     spyOn(component, 'getMedia').and.returnValue(5.5);
-
     component.obtenerMediaSize();
-
     expect(component.getMedia).toHaveBeenCalledWith(...sizeData);
-
     expect(component.media_size).toBeDefined();
   });
 
@@ -156,28 +136,18 @@ describe('MediaComponent', () => {
 
   it('should calculate media_size if size.data is valid', () => {
     const sizeData = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
-
     component.numbers_size = { data: sizeData };
-
     spyOn(component, 'getMedia').and.returnValue(5.5);
-
     component.obtenerMediaSize();
-
     expect(component.getMedia).toHaveBeenCalledWith(...sizeData);
-
     expect(component.media_size).toBeDefined();
   });
   it('should calculate media_hours if horas.data is valid', () => {
     const horasData = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
-
     component.numbers_hours = { data: horasData };
-
     spyOn(component, 'getMedia').and.returnValue(5.5);
-
     component.obtenerMediaHours();
-
     expect(component.getMedia).toHaveBeenCalledWith(...horasData);
-
     expect(component.media_hours).toBeDefined();
   });
 
