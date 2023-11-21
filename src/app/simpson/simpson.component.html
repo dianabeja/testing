@@ -1,1 +1,34 @@
-<p>simpson works!</p>
+<html lang="es" *ngIf="!Mostrar_Pantalla">
+<div class="contenedor1">
+    <section class="Botones_Group">
+        <button class="boton_atras" routerLink="/inicio" (click)="Ocultar()">
+            < </button>
+                <button (click)="simpson(f, x0, x1, num_seg, dof, error)" class="boton_calcular">Calcular</button>
+                <div class="result">p= {{result}}</div>
+    </section>
+
+    <section class="Botones_Group2">
+        <p>f</p>
+        <select class="Input_f" name="" id="" [(ngModel)]="f">
+            <option value="t">t</option>
+            <option value="2x">2x</option>
+            <option value="x*x">x*x</option>
+            <option value="1/x">1/x</option>/
+        </select>
+        <p>x0</p>
+        <input class="Input_x0" id="x0" [(ngModel)]="x0" type="number" name="Input_x0" placeholder="x0" />
+        <p>x1</p>
+        <input class="Input_x1" id="x1" [(ngModel)]="x1" type="number" name="Input_x1" placeholder="x1" />
+        <p>num_seg</p>
+        <input class="Input_num_seg" id="num_seg" [(ngModel)]="num_seg" type="number" name="Input_num_seg" placeholder="0.0" />
+        <p>dof</p>
+        <input class="Input_dof" id="dof" [(ngModel)]="dof" type="number" name="Input_dof" placeholder="0.0" />
+        <p>error</p>
+        <input class="Input_error" id="error" [(ngModel)]="error" type="number" name="Input_error" placeholder="0.0" />
+
+    </section>
+</div>
+
+</html>
+
+<router-outlet *ngIf="Mostrar_Pantalla"> </router-outlet>
