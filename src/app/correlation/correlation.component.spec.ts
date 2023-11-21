@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
-import { LinearRegressionComponent } from '../linear-regression/linear-regression.component';
+import { LinearRegressionComponent, yk } from '../linear-regression/linear-regression.component';
 import { CorrelationComponent } from './correlation.component';
-import { sum, sumX, sumXX, sumXY, sumYY  } from '../linear-regression/linear-regression.component';
+import { By } from '@angular/platform-browser';
+
 
 import { TestService } from '../service/datatest1.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -160,5 +161,55 @@ describe('CorrelationComponent', () => {
     expect(rr).toBeCloseTo(0.8988, 4);
 
   })
+
+  it('should set Mostrar_Pantalla to true', () => {
+    expect(component.Mostrar_Pantalla).toBeFalsy(); // Assuming Mostrar_Pantalla starts as false
+    component.Ocultar();
+    expect(component.Mostrar_Pantalla).toBeTruthy(); // Mostrar_Pantalla should be set to true
+  });
+
+  it('cambiarEstadoBoton1 cambia el estado correctamente', () => {
+    component.cambiarEstadoBoton1();
+    expect(component.botonActivo1).toBe(true);
+    expect(component.botonActivo2).toBe(false);
+    expect(component.botonActivo3).toBe(false);
+    expect(component.botonActivo4).toBe(false);
+  });
+
+  it('cambiarEstadoBoton2 cambia el estado correctamente', () => {
+    component.cambiarEstadoBoton2();
+    expect(component.botonActivo2).toBe(true);
+    expect(component.botonActivo1).toBe(false);
+    expect(component.botonActivo3).toBe(false);
+    expect(component.botonActivo4).toBe(false);
+  });
+
+  it('cambiarEstadoBoton3 cambia el estado correctamente', () => {
+    component.cambiarEstadoBoton3();
+    expect(component.botonActivo3).toBe(true);
+    expect(component.botonActivo2).toBe(false);
+    expect(component.botonActivo1).toBe(false);
+    expect(component.botonActivo4).toBe(false);
+  });
+
+  it('cambiarEstadoBoton4 cambia el estado correctamente', () => {
+    component.cambiarEstadoBoton4();
+    expect(component.botonActivo4).toBe(true);
+    expect(component.botonActivo1).toBe(false);
+    expect(component.botonActivo3).toBe(false);
+    expect(component.botonActivo2).toBe(false);
+  });
+
+
+  it('regresion actualiza correctamente los valores', () => {
+    let r = component.regresion(
+      component.datos_Api_Test3.actual_added,
+      component.datos_Api_Test3.plan_added,
+    );
+    component.x=386;
+    expect(component.b0).toBeCloseTo(-23.9239, 4);
+  });
+  
+
 
 });

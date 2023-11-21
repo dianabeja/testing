@@ -86,3 +86,18 @@ export function sumYY(y: number[]): number {
 export function sumXX(x: number[]): number {
   return sum(x.map((value) => value * value));
 }
+export function B1(x: number[], y: number[]): number {
+  const N = x.length;
+  return (
+    (N * sumXY(x, y) - sumX(x) * sum(y)) /
+    (N * sumYY(x) - Math.pow(sumX(x), 2))
+  );
+}
+
+export function B0(x: number[], y: number[]): number {
+  return (sum(y) - B1(x, y) * sumX(x)) / x.length;
+}
+
+export function yk(x: number[], y: number[], xk: number): number {
+  return B0(x, y) + B1(x, y) * xk;
+}

@@ -131,9 +131,9 @@ describe('StddevComponent', () => {
   });
 
   it('should set Mostrar_Pantalla to true', () => {
-    expect(component.Mostrar_Pantalla).toBeFalsy(); // Assuming Mostrar_Pantalla starts as false
+    expect(component.Mostrar_Pantalla).toBeFalsy(); 
     component.Ocultar();
-    expect(component.Mostrar_Pantalla).toBeTruthy(); // Mostrar_Pantalla should be set to true
+    expect(component.Mostrar_Pantalla).toBeTruthy(); 
   });
 
   //pruebas de integración

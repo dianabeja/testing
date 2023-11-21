@@ -1,0 +1,229 @@
+.boton_atras {
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: #b697dd;
+    color: white; /* Color de texto blanco */
+    border: none;
+    border-radius: 20px;
+    margin: 20% 20% 10% 20%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  .boton_test1 {
+    padding: 10px;
+    width: 125px;
+    height: 70px;
+    font-size: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: #b697dd;
+    color: white; /* Color de texto blanco */
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin: 10% 20%;
+  }
+  .boton_test2 {
+    padding: 20px;
+    width: 125px;
+    height: 70px;
+    font-size: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: #b697dd;
+    color: white; /* Color de texto blanco */
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin: 10% 20%;
+  }
+  .boton_test3 {
+    padding: 20px;
+    width: 125px;
+    height: 70px;
+    font-size: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: #b697dd;
+    color: white; /* Color de texto blanco */
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin: 10% 20%;
+  }
+  .boton_test4 {
+    padding: 20px;
+    width: 125px;
+    height: 70px;
+    font-size: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: #b697dd;
+    color: white; /* Color de texto blanco */
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin: 10% 20%;
+  }
+  
+  .boton_test1:not(.boton-activo),
+  .boton_test2:not(.boton-activo),
+  .boton_test3:not(.boton-activo),
+  .boton_test4:not(.boton-activo) {
+    background-color: white;
+    color: #b697dd;
+    /* Otros estilos para el botón inactivo */
+  }
+
+  .Botones_Group2 button:active {
+      background-color: #B697DD;
+      color: white;
+    }
+  .Botones_Group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: #d9d9d9;
+    grid-area: Opciones;
+    width: 100%;
+    height: 610px;
+    max-height: 100%;
+  }
+  
+  .Botones_Group2 {
+    display: flex;
+
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    grid-area: Listas;
+    width: 100%;
+    height: 500px;
+    max-height: 100%;
+    color:#b697dd ;
+    margin-left: 10%;
+  }
+  
+  .texto {
+    margin-left: 2%;
+    font-size: 30px;
+    font-weight: 700;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  
+  
+  .contenedor1 {
+    display: grid;
+    grid-template-columns: 18% 72%;
+    grid-template-areas: " Opciones Listas";
+    
+  }
+  
+  .boton_correlacion {
+    padding: 20px;
+    width: 300px;
+    height: 70px;
+    font-size: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: #d9d9d9;
+    color: #b697dd; /* Color de texto blanco */
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin: 0% 5% 3% 0%;
+  }
+  .boton_regresion {
+    padding: 20px;
+    width: 300px;
+    height: 70px;
+    font-size: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: #d9d9d9;
+    color: #b697dd;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin: 2% 5% 3% 0%;
+  }
+  .result_b0 {
+    padding: 10px;
+    width: 300px;
+    height: 50px;
+    font-size: 30px;
+    font-weight: 700;
+    background-color: #ffffff;
+    color: #b697dd; 
+    border-radius: 20px;
+    margin: 0% 5% 2% 0%;
+    border: 1px solid #b697dd; 
+  }
+  .result_b1 {
+    padding: 10px;
+    width: 300px;
+    height: 50px;
+    font-size: 30px;
+    font-weight: 700;
+    background-color: #ffffff;
+    color: #b697dd; 
+    border-radius: 20px;
+    margin: 0% 5% 2% 0%;
+    border: 1px solid #b697dd; 
+  }
+  .result_yk {
+    padding: 10px;
+    width: 300px;
+    height: 50px;
+    font-size: 30px;
+    font-weight: 700;
+    background-color: #ffffff;
+    color: #b697dd; 
+    border-radius: 20px;
+    margin: 0% 5% 2% 0%;
+    border: 1px solid #b697dd; 
+  }
+  .result_r {
+    padding: 10px;
+    width: 300px;
+    height: 50px;
+    font-size: 30px;
+    font-weight: 700;
+    background-color: #ffffff;
+    color: #b697dd; 
+    border-radius: 20px;
+    margin: 0% 3% 0% 0%;
+    border: 1px solid #b697dd; 
+  }
+  .result_rr {
+    padding: 10px;
+    width: 300px;
+    height: 50px;
+    font-size: 30px;
+    font-weight: 700;
+    background-color: #ffffff;
+    color: #b697dd; 
+    border-radius: 20px;
+    margin: 2% 5% 2% 0%;
+    border: 1px solid #b697dd; 
+  }
+  .result_r_and_rr {
+    display: flex;
+    align-items: center; /* Alinea los elementos verticalmente en el centro */
+    margin-left: 10px; /* Otra separación si es necesario */
+  }
+  .Input_x{
+    padding: 10px;
+    width: 250px;
+    height: 50px;
+    font-size: 30px;
+    font-weight: 700;
+    background-color: #ffffff;
+    color: #b697dd; 
+    border-radius: 20px;
+    margin: 2% 5% 0% 0%;
+    border: 1px solid #b697dd; 
+  }

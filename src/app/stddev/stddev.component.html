@@ -7,8 +7,8 @@
     </section>
 
     <section class="Botones_Group2">
-      <button (click)="getSize()" class="boton_size">1a_proxy_size</button>
-      <button (click)="getHours()" class="boton_hours">1a_dev_hours</button>
+      <button (click)="getSize(); cambiarEstadoBoton1()" class="boton_size" [class.boton-activo]="botonActivo1">1a_proxy_size</button>
+      <button (click)="getHours(); cambiarEstadoBoton2()" class="boton_hours" [class.boton-activo]="botonActivo2">1a_dev_hours</button>
       <div class="texto">El resultado es:  </div>
       <div class="result">{{resultado}}</div>
     </section>
@@ -17,4 +17,3 @@
 </html>
 
 <router-outlet *ngIf="Mostrar_Pantalla"> </router-outlet>
-

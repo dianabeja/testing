@@ -13,6 +13,7 @@ export class StddevComponent implements OnInit {
   numbers_hours: any[] | any;
   desviacion_size: any;
   desviacion_hours: any;
+
   public resultado = 0;
 
   public Mostrar_Pantalla: boolean = false;
@@ -38,7 +39,7 @@ export class StddevComponent implements OnInit {
   async getHours() {
     this.array_elegido = await this.dataServiceHours.gethours().toPromise();
     this.array_elegido.data = this.array_elegido.horas;
-
+    console.log(this.array_elegido)
     return new Promise<void>((resolve, reject) => {
       this.dataServiceHours.gethours().subscribe(
         (data: any) => {
@@ -51,6 +52,10 @@ export class StddevComponent implements OnInit {
 
   async getSize() {
     this.array_elegido = await this.dataServiceSize.getSize().toPromise();
+    this.array_elegido.data = this.array_elegido.data;
+
+    console.log(this.array_elegido)
+
     return new Promise<void>((resolve, reject) => {
       this.dataServiceSize.getSize().subscribe(
         (data: any) => {
@@ -111,4 +116,18 @@ export class StddevComponent implements OnInit {
     this.resultado = result;
     return result;
   }
+
+  botonActivo1: boolean = false;
+  botonActivo2: boolean = false;
+
+  cambiarEstadoBoton1() {
+    this.botonActivo1 = !this.botonActivo1;
+    this.botonActivo2 = false;
+  }
+
+  cambiarEstadoBoton2() {
+    this.botonActivo2 = !this.botonActivo2;
+    this.botonActivo1 = false;
+  }
+
 }
